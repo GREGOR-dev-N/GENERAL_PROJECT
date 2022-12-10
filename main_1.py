@@ -13,8 +13,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, \
 class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('GENERAL_PROJECT.ui', self)  # Загружаем дизайн
-        # Обратите внимание: имя элемента такое же как в QTDesigner
+        uic.loadUi('GENERAL_PROJECT.ui', self)
         self.pushButton.clicked.connect(self.clicked)
 
     def clicked(self):
