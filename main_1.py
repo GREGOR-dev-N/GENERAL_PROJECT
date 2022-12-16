@@ -36,11 +36,11 @@ class after_click_button(QMainWindow):
         self.size_image = Image.open(self.fname)
         self.very_origin = Image.open(self.fname)
 
-        self.pushButton_4.clicked.connect(self.bd)
-        self.pushButton_5.clicked.connect(self.bd)
-        self.pushButton_6.clicked.connect(self.bd)
-        self.pushButton_4.close()
-        self.pushButton_5.close()
+        self.pushButton_undo.clicked.connect(self.bd)
+        self.pushButton_redo.clicked.connect(self.bd)
+        self.pushButton_RESET.clicked.connect(self.bd)
+        self.pushButton_undo.close()
+        self.pushButton_redo.close()
 
         self.con = sqlite3.connect("GENERAL_IMAGE.sqlite3")
         self.cur = self.con.cursor()
@@ -49,11 +49,11 @@ class after_click_button(QMainWindow):
 
         self.current_id = 0
 
-        self.verticalSlider.sliderReleased.connect(self.do_action)
-        self.verticalSlider_2.sliderReleased.connect(self.do_action)
-        self.verticalSlider_3.sliderReleased.connect(self.do_action)
-        self.verticalSlider_4.sliderReleased.connect(self.do_action)
-        self.verticalSlider_5.sliderReleased.connect(self.do_action)
+        self.verticalSlider_size.sliderReleased.connect(self.do_action)
+        self.verticalSlider_transparency.sliderReleased.connect(self.do_action)
+        self.verticalSlider_R.sliderReleased.connect(self.do_action)
+        self.verticalSlider_G.sliderReleased.connect(self.do_action)
+        self.verticalSlider_B.sliderReleased.connect(self.do_action)
 
         if self.curr_image.size[0] > self.curr_image.size[1]:
             self.koef = 500 / self.curr_image.size[0]
@@ -70,6 +70,11 @@ class after_click_button(QMainWindow):
 
         self.very_origin = self.curr_image.copy()
 
+        self.curr_image.putalpha(0)
+        self.curr_image = self.currr_image.resize(
+            (int(self.x * 1 / 100), int(self.y * 1 / 100)),
+            Image.LANCZOS)
+
         self.image = ImageQt(self.curr_image)
         self.pixmap = QPixmap.fromImage(self.image)
 
@@ -79,26 +84,26 @@ class after_click_button(QMainWindow):
         self.image2.setPixmap(self.pixmap)
         self.image2.setStyleSheet('background-color: rgba(2, 2, 2, 0)')
 
-        self.verticalSlider_2.setMaximum(255)
-        self.verticalSlider_3.setMaximum(255)
-        self.verticalSlider_4.setMaximum(255)
-        self.verticalSlider_5.setMaximum(255)
-        self.verticalSlider_2.valueChanged[int].connect(self.slider_2)
-        self.verticalSlider_3.valueChanged[int].connect(self.slider_3)
-        self.verticalSlider_4.valueChanged[int].connect(self.slider_4)
-        self.verticalSlider_5.valueChanged[int].connect(self.slider_5)
+        self.verticalSlider_transparency.setMaximum(255)
+        self.verticalSlider_R.setMaximum(255)
+        self.verticalSlider_G.setMaximum(255)
+        self.verticalSlider_B.setMaximum(255)
+        self.verticalSlider_transparency.valueChanged[int].connect(self.slider_transparency)
+        self.verticalSlider_R.valueChanged[int].connect(self.slider_R)
+        self.verticalSlider_G.valueChanged[int].connect(self.slider_G)
+        self.verticalSlider_B.valueChanged[int].connect(self.slider_B)
 
-        self.verticalSlider.setMinimum(1)
-        self.verticalSlider.valueChanged[int].connect(self.slider)
+        self.verticalSlider_size.setMinimum(1)
+        self.verticalSlider_size.valueChanged[int].connect(self.slider_resize)
 
-        self.pushButton.clicked.connect(self.clicked)
-        self.pushButton_2.clicked.connect(self.viniet)
-        self.pushButton_3.clicked.connect(self.save_all)
-        self.pushButton_7.clicked.connect(self.obrezka)
+        self.pushButton_applyFilters.clicked.connect(self.clicked_filters)
+        self.pushButton_applyCores.clicked.connect(self.viniet)
+        self.pushButton_saveALL.clicked.connect(self.save_all)
+        self.pushButton_crop.clicked.connect(self.obrezka)
 
         self.do_action()  # сохранение первой картинки
 
-    def slider(self, value):  # изменение размера картинки
+    def slider_resize(self, value):  # изменение размера картинки
         self.curr_image = self.currr_image.resize(
             (int(self.x * value / 100), int(self.y * value / 100)),
             Image.LANCZOS)
@@ -106,7 +111,7 @@ class after_click_button(QMainWindow):
         self.pixmap = QPixmap.fromImage(ImageQt(self.curr_image))
         self.image2.setPixmap(self.pixmap)
 
-    def slider_2(self, value):  # изменение прозрачности
+    def slider_transparency(self, value):  # изменение прозрачности
         self.currr_image = self.currr_image.convert('RGB')
         self.curr_image = self.curr_image.convert('RGB')
 
@@ -115,7 +120,7 @@ class after_click_button(QMainWindow):
         self.pixmap = QPixmap.fromImage(ImageQt(self.curr_image))
         self.image2.setPixmap(self.pixmap)
 
-    def clicked(self):
+    def clicked_filters(self):
         if self.comboBox.currentText() == 'black and white':
             self.curr_image = self.curr_image.convert("L")
 
@@ -233,7 +238,7 @@ class after_click_button(QMainWindow):
 
         self.do_action()
 
-    def slider_3(self, value):
+    def slider_R(self, value):
         self.curr_image = self.curr_image.convert('RGB')
 
         pixels = self.curr_image.load()  # список с пикселями
@@ -249,7 +254,7 @@ class after_click_button(QMainWindow):
         self.pixmap = QPixmap.fromImage(ImageQt(self.curr_image))
         self.image2.setPixmap(self.pixmap)
 
-    def slider_4(self, value):
+    def slider_G(self, value):
         self.curr_image = self.curr_image.convert('RGB')
 
         pixels = self.curr_image.load()  # список с пикселями
@@ -265,7 +270,7 @@ class after_click_button(QMainWindow):
         self.pixmap = QPixmap.fromImage(ImageQt(self.curr_image))
         self.image2.setPixmap(self.pixmap)
 
-    def slider_5(self, value):
+    def slider_B(self, value):
         self.curr_image = self.curr_image.convert('RGB')
 
         pixels = self.curr_image.load()  # список с пикселями
@@ -284,29 +289,29 @@ class after_click_button(QMainWindow):
     def viniet(self):
         name, ok_pressed = QInputDialog.getText(self, "Значения ядер",
                                                 "Введите через пробел значения ядер")
+        if ok_pressed:
+            name = list(map(lambda x: float(x), name.split()))
 
-        name = list(map(lambda x: float(x), name.split()))
+            self.curr_image = self.curr_image.filter(ImageFilter.Kernel((3, 3), (
+                name[0], name[1], name[2], name[3], name[4], name[5], name[6],
+                name[7],
+                name[8]), 1, 0))
 
-        self.curr_image = self.curr_image.filter(ImageFilter.Kernel((3, 3), (
-            name[0], name[1], name[2], name[3], name[4], name[5], name[6],
-            name[7],
-            name[8]), 1, 0))
+            self.currr_image = self.curr_image.copy()
+            self.pixmap = QPixmap.fromImage(ImageQt(self.curr_image))
+            self.image2.setPixmap(self.pixmap)
 
-        self.currr_image = self.curr_image.copy()
-        self.pixmap = QPixmap.fromImage(ImageQt(self.curr_image))
-        self.image2.setPixmap(self.pixmap)
-
-        self.do_action()
+            self.do_action()
 
     def do_action(self):
         self.current_id += 1
 
         if len(self.cur.execute("""SELECT * FROM images""").fetchall()) == 0:
-            self.pushButton_4.close()
-            self.pushButton_5.close()
+            self.pushButton_undo.close()
+            self.pushButton_redo.close()
         else:
-            self.pushButton_4.show()
-            self.pushButton_5.show()
+            self.pushButton_undo.show()
+            self.pushButton_redo.show()
 
         roi_img = self.curr_image
         img_byte_arr = io.BytesIO()
@@ -325,11 +330,11 @@ class after_click_button(QMainWindow):
         lage = len(self.cur.execute("""SELECT * FROM images""").fetchall())
 
         if lage == 0:
-            self.pushButton_4.close()
-            self.pushButton_5.close()
+            self.pushButton_undo.close()
+            self.pushButton_redo.close()
         else:
-            self.pushButton_4.show()
-            self.pushButton_5.show()
+            self.pushButton_undo.show()
+            self.pushButton_redo.show()
             if self.sender().text() == '<-    undo':
                 if self.current_id - 1 >= 1:
                     result = self.cur.execute(
@@ -404,7 +409,7 @@ class after_click_obrezka(QMainWindow):
         self.label_5.setText(
             'X between 0 and ' + str(self.x) + '\nY between 0 and ' + str(
                 self.y))
-        self.pushButton.clicked.connect(self.clicked)
+        self.pushButton_applyFilters.clicked.connect(self.clicked)
 
     def clicked(self):
         if self.lineEdit.text() and self.lineEdit_2.text() and self.lineEdit_3.text() \

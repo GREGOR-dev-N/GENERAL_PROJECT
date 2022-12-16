@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>866</width>
+    <width>928</width>
     <height>668</height>
    </rect>
   </property>
@@ -47,7 +47,7 @@
      <widget class="QFrame" name="frame_2">
       <property name="minimumSize">
        <size>
-        <width>276</width>
+        <width>302</width>
         <height>560</height>
        </size>
       </property>
@@ -69,15 +69,15 @@
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>3</x>
          <y>10</y>
-         <width>276</width>
-         <height>548</height>
+         <width>291</width>
+         <height>551</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
-         <widget class="QPushButton" name="pushButton_7">
+         <widget class="QPushButton" name="pushButton_crop">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -100,7 +100,7 @@ background-color: rgba(255, 255, 255, 50)
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_6">
+         <widget class="QPushButton" name="pushButton_RESET">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -128,7 +128,7 @@ background-color: rgba(255, 255, 255, 50)
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
-           <widget class="QPushButton" name="pushButton_4">
+           <widget class="QPushButton" name="pushButton_undo">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -150,7 +150,7 @@ background-color: rgba(255, 255, 255, 50)</string>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_5">
+           <widget class="QPushButton" name="pushButton_redo">
             <property name="minimumSize">
              <size>
               <width>109</width>
@@ -203,7 +203,7 @@ background-color: rgba(255, 255, 255, 50)</string>
            </widget>
           </item>
           <item>
-           <widget class="QSlider" name="verticalSlider">
+           <widget class="QSlider" name="verticalSlider_size">
             <property name="minimumSize">
              <size>
               <width>259</width>
@@ -257,7 +257,7 @@ background-color: rgba(255, 255, 255, 50)</string>
            </widget>
           </item>
           <item>
-           <widget class="QSlider" name="verticalSlider_2">
+           <widget class="QSlider" name="verticalSlider_transparency">
             <property name="minimumSize">
              <size>
               <width>259</width>
@@ -358,7 +358,7 @@ background-color: rgba(255, 255, 255, 50)</string>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="pushButton_applyFilters">
             <property name="minimumSize">
              <size>
               <width>80</width>
@@ -417,7 +417,7 @@ background-color: rgba(255, 255, 255, 50)</string>
            </widget>
           </item>
           <item>
-           <widget class="QSlider" name="verticalSlider_3">
+           <widget class="QSlider" name="verticalSlider_R">
             <property name="minimumSize">
              <size>
               <width>259</width>
@@ -470,7 +470,7 @@ background-color: rgba(255, 255, 255, 50)</string>
            </widget>
           </item>
           <item>
-           <widget class="QSlider" name="verticalSlider_4">
+           <widget class="QSlider" name="verticalSlider_G">
             <property name="minimumSize">
              <size>
               <width>259</width>
@@ -523,7 +523,7 @@ background-color: rgba(255, 255, 255, 50)</string>
            </widget>
           </item>
           <item>
-           <widget class="QSlider" name="verticalSlider_5">
+           <widget class="QSlider" name="verticalSlider_B">
             <property name="minimumSize">
              <size>
               <width>259</width>
@@ -550,15 +550,21 @@ background-color: rgba(255, 255, 255, 50)</string>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="QLabel" name="label_6">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
-              <width>123</width>
+              <width>105</width>
               <height>39</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>123</width>
+              <width>148</width>
               <height>39</height>
              </size>
             </property>
@@ -576,16 +582,22 @@ background-color: rgba(255, 255, 255, 50)</string>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="pushButton_applyCores">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
-              <width>122</width>
+              <width>80</width>
               <height>30</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>122</width>
+              <width>99</width>
               <height>30</height>
              </size>
             </property>
@@ -607,6 +619,9 @@ background-color: rgba(255, 255, 255, 50)</string>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
           <item>
            <spacer name="horizontalSpacer">
             <property name="minimumSize">
@@ -633,16 +648,16 @@ background-color: rgba(255, 255, 255, 50)</string>
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="pushButton_saveALL">
             <property name="minimumSize">
              <size>
-              <width>83</width>
+              <width>80</width>
               <height>30</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>70</width>
+              <width>99</width>
               <height>30</height>
              </size>
             </property>
@@ -670,8 +685,6 @@ background-color: rgba(255, 255, 255, 50)</string>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="test.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
